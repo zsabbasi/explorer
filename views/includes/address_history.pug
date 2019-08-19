@@ -30,10 +30,10 @@ tbody
           else
             | #{amount.toFixed(8)}
       else if out > 0
-        td.success
+        td.text-right.success
           - var amount = out / 100000000
           | + #{amount.toFixed(8)}
       else
-        td.danger
+        td.text-right.danger
           - var amount = vin / 100000000
           | - #{amount.toFixed(8)}

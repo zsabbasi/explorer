@@ -17,8 +17,23 @@ var app = express();
 // bitcoinapi
 bitcoinapi.setWalletDetails(settings.wallet);
 if (settings.heavy != true) {
-  bitcoinapi.setAccess('only', ['getinfo', 'getnetworkhashps', 'getmininginfo','getdifficulty', 'getconnectioncount',
-    'getblockcount', 'getblockhash', 'getblock', 'getrawtransaction', 'getpeerinfo', 'gettxoutsetinfo']);
+  bitcoinapi.setAccess('only', [
+    'getinfo',
+    'getnetworkhashps',
+    'getmininginfo',
+    'getdifficulty',
+    'getconnectioncount',
+    'getblockcount',
+    'getblockhash',
+    'getblock',
+    'getrawtransaction',
+    'getpeerinfo',
+    'gettxoutsetinfo',
+    'getmasternodecount',
+    'getmasternodecountonline',
+    'masternode',
+    'masternodelist',
+  ]);
 } else {
   // enable additional heavy api calls
   /*
@@ -110,6 +125,7 @@ app.use('/ext/connections', function(req,res){
 app.set('title', settings.title);
 app.set('symbol', settings.symbol);
 app.set('coin', settings.coin);
+app.set('baseType', settings.baseType);
 app.set('locale', locale);
 app.set('display', settings.display);
 app.set('markets', settings.markets);

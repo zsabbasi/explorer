@@ -35,7 +35,7 @@ block content
     });
     $(window).resize(function () { 
       pieWealthDist.replot( { resetAxes: false } );
-    });  
+    });
   .col-xs-12.col-md-8
     .tabpanel
       ul.nav.nav-tabs(role='tablist')
@@ -48,47 +48,54 @@ block content
         include ./includes/rl_balance.pug
       #received.tabpanel.tab-pane
         include ./includes/rl_received.pug
-  if show_dist == true
+  if (show_dist || show_coin_supply)
     .col-md-4.col-xs-12
-      #summary-panel.panel.panel-default(style='margin-top:47px;')
-        .panel-heading
-          h3.panel-title #{settings.locale.rl_wealth}
-        table.table.table-hover.table-bordered
-          thead
-            tr
-              th
-              th Amount (#{settings.symbol})
-              th.text-center %
-          tbody
-            tr
-              th
-                div.pull-left(style='background-color:#d9534f;width:20px;height:20px;margin-right:6px;')
-                span #{settings.locale.rl_top25}
-              td #{parseFloat(dista.total).toFixed(8)}
-              td.text-center #{parseFloat(dista.percent).toFixed(2)}
-            tr
-              th
-                div.pull-left(style='background-color:#5cb85c;width:20px;height:20px;margin-right:6px;')
-                span #{settings.locale.rl_top50}
-              td #{parseFloat(distb.total).toFixed(8)}
-              td.text-center #{parseFloat(distb.percent).toFixed(2)}
-            tr
-              th
-                div.pull-left(style='background-color:#428bca;width:20px;height:20px;margin-right:6px;')
-                span #{settings.locale.rl_top75}
-              td #{parseFloat(distc.total).toFixed(8)}
-              td.text-center #{parseFloat(distc.percent).toFixed(2)}
-            tr
-              th
-                div.pull-left(style='background-color:#222;width:20px;height:20px;margin-right:6px;')
-                span #{settings.locale.rl_top100}
-              td #{parseFloat(distd.total).toFixed(8)}
-              td.text-center #{parseFloat(distd.percent).toFixed(2)}
-            tr
-              th
-                span #{settings.locale.total}
-              td 
-              td.text-center #{(100 - parseFloat(distd.percent)).toFixed(2)}
-      center
-        div#pieChart(style="width:300px;height:305px;margin:0px;")
+      if show_coin_supply
+        .panel.panel-default(style='margin-top:47px;')
+          .panel-heading
+            h3.panel-title Coin Supply
+          div.text-center(style='padding: 20px 0;')
+            =coin_supply
+      if show_dist
+        #summary-panel.panel.panel-default(style='margin-top:47px;')
+          .panel-heading
+            h3.panel-title #{settings.locale.rl_wealth}
+          table.table.table-hover.table-bordered
+            thead
+              tr
+                th
+                th Amount (#{settings.symbol})
+                th.text-center %
+            tbody
+              tr
+                th
+                  div.pull-left(style='background-color:#d9534f;width:20px;height:20px;margin-right:6px;')
+                  span #{settings.locale.rl_top25}
+                td.text-right #{parseFloat(dista.total).toFixed(8)}
+                td.text-center #{parseFloat(dista.percent).toFixed(2)}
+              tr
+                th
+                  div.pull-left(style='background-color:#5cb85c;width:20px;height:20px;margin-right:6px;')
+                  span #{settings.locale.rl_top50}
+                td.text-right #{parseFloat(distb.total).toFixed(8)}
+                td.text-center #{parseFloat(distb.percent).toFixed(2)}
+              tr
+                th
+                  div.pull-left(style='background-color:#428bca;width:20px;height:20px;margin-right:6px;')
+                  span #{settings.locale.rl_top75}
+                td.text-right #{parseFloat(distc.total).toFixed(8)}
+                td.text-center #{parseFloat(distc.percent).toFixed(2)}
+              tr
+                th
+                  div.pull-left(style='background-color:#222;width:20px;height:20px;margin-right:6px;')
+                  span #{settings.locale.rl_top100}
+                td.text-right #{parseFloat(distd.total).toFixed(8)}
+                td.text-center #{parseFloat(distd.percent).toFixed(2)}
+              tr
+                th
+                  span #{settings.locale.total}
+                td
+                td.text-center #{(100 - parseFloat(distd.percent)).toFixed(2)}
+        center
+          div#pieChart(style="width:300px;height:305px;margin:0px;")
   .row.footer-margin
