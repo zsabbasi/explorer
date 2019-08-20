@@ -18,8 +18,12 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceFolder}/app.js"
+            "name": "Launch Updater",
+            "program": "${workspaceFolder}/scripts/sync.js",
+            "args": [
+                "index",
+                "update"
+            ]
         },
         {
             "type": "node",
