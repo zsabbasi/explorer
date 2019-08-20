@@ -28,32 +28,33 @@ html
         $('##{active}').addClass('active');
         function update_stats(){   
           $.ajax({url: '/ext/summary', success: function(json){
-            $("#supply").text(json.data[0].supply);
-            $("#difficulty").text(json.data[0].difficulty);
-            $("#masternodeCount").text(json.data[0].masternodeCount);
-            $("#masternodeOnlineCount").text(json.data[0].masternodeOnlineCount);
-            $("#difficultyHybrid").text(json.data[0].difficultyHybrid);
-            $("#hashrate").text(json.data[0].hashrate);
-            $("#price_btc").text(json.data[0].lastPriceBtc);
+            var data = json.data[0];
+            $("#supply").text(data.supply);
+            $("#difficulty").text(data.difficulty);
+            $("#masternodeCount").text(data.masternodeCount);
+            $("#masternodeOnlineCount").text(data.masternodeOnlineCount);
+            $("#difficultyHybrid").text(data.difficultyHybrid);
+            $("#hashrate").text(data.hashrate);
+            $("#price_btc").text(data.lastPriceBtc);
             $("#lblX1").text(' ');
-            $("#price_usd").text(json.data[0].lastPriceUsd);
-            $("#cmc_market_cap").text(json.data[0].marketCapUsd);
-            $("#cmc_volume_24h").text(json.data[0].marketVolumeUsd);
+            $("#price_usd").text(data.lastPriceUsd);
+            $("#cmc_market_cap").text(data.marketCapUsd);
+            $("#cmc_volume_24h").text(data.marketVolumeUsd);
 
-            $("#lblConnections").text(json.data[0].connections + ' connections');
-            $("#lblBlockcountValue").text(json.data[0].blockcount);
+            $("#lblConnections").text(data.connections + ' connections');
+            $("#lblBlockcountValue").text(data.blockcount);
 
 
-            if (json.data[0].cmc) {
-              if (json.data[0].cmc.percent_change_24h) {
-                $("#price_percent_change_value").text(json.data[0].cmc.percent_change_24h);
-                if (json.data[0].cmc.percent_change_24h.substr(0, 1) === '-')
+            if (data.cmc) {
+              if (data.cmc.percent_change_24h) {
+                $("#price_percent_change_value").text(data.cmc.percent_change_24h);
+                if (data.cmc.percent_change_24h.substr(0, 1) === '-')
                   $("#price_percent_change").attr('class', 'text-danger');
                 else
                   $("#price_percent_change").attr('class', 'text-success');
               }
-              if (json.data[0].cmc.rank)
-                $("#cmc_rank").text(json.data[0].cmc.rank);
+              if (data.cmc.rank)
+                $("#cmc_rank").text(data.cmc.rank);
             }
           }});
         }
